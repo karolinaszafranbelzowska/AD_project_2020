@@ -1,2 +1,2 @@
 # AD_project_2020
-Applied Databases project
+Applied Databases - GMIT project 2020
