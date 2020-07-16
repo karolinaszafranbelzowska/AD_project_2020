@@ -7,3 +7,26 @@ Give the MySQL command that shows;
 
 For all cities and countries visited by Alan in alphabetical order by city name.
 
+Tables: 
+	c - city
+	co - country
+	has - hasvisitedcity
+	p - person
+	cl - countrylanguage
+
+===============================================================================================================================
+
+mysql> select c.Name,has.dateArrived, co.Name
+    -> from person p
+    -> inner join hasvisitedcity has
+    -> 		on has.personID = p.personID
+    -> inner join city c
+    -> 		on has.cityID = c.ID
+    -> inner join country co
+    -> 		on c.CountryCode = co.Code
+    -> where p.personname = "Alan"
+    -> ORDER BY c.Name ASC;
+
+===============================================================================================================================
+
+
