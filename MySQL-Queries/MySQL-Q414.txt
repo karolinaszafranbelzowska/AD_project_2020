@@ -19,7 +19,7 @@ Tables:
 	p - person
 	cl - countrylanguage
 
-===========================================================================================
+=======================================================================================================
 
    mysql> SELECT c.name as name, co.name as name, cl.Language as language, cl.Percentage as percentage
 	> FROM city c
