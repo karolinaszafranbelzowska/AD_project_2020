@@ -1,0 +1,32 @@
+4.1.4 Capitals and Official Languages of North America
+
+
+Give the SQL command to show for each country in North America:
+
+	- The name of the capital city
+	- The name of the country
+	- The official language(s)
+	- The percentage of people who speak the official language(s) 
+
+The results should be alphabetical city name order, and within that by country name order, 
+and within that by language order, and within that by ascending percentage.
+
+
+Tables: 
+	c - city
+	co - country
+	has - hasvisitedcity
+	p - person
+	cl - countrylanguage
+
+===========================================================================================
+
+   mysql> SELECT c.name as name, co.name as name, cl.Language as language, cl.Percentage as percentage
+	> FROM city c
+	> INNER JOIN country co
+	> ON c.ID = co.Capital
+	> INNER JOIN countrylanguage cl
+	> ON co.Code = cl.CountryCode
+	> WHERE cl.IsOfficial = "T"
+	> AND co.Continent = "North America"
+	> ORDER BY c.Name ASC, co.Name ASC, cl.Language ASC, cl.Percentage ASC;

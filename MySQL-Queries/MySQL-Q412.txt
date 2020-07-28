@@ -4,12 +4,6 @@ Give the MySQL command to show the country name the country's life expectancy fo
 in Europe whose life expectancy is lower than the average in alphabetical order by country name.
 
 
-Tables: 
-	c - city
-	co - country
-	has - hasvisitedcity
-	p - person
-	cl - countrylanguage
 
 ================================================================================================
 
