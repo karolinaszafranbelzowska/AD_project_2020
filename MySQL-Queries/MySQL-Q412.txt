@@ -1,0 +1,23 @@
+4.1.2. European countries with lower than average life expectancy
+
+Give the MySQL command to show the country name the country's life expectancy for all countries 
+in Europe whose life expectancy is lower than the average in alphabetical order by country name.
+
+
+Tables: 
+	c - city
+	co - country
+	has - hasvisitedcity
+	p - person
+	cl - countrylanguage
+
+================================================================================================
+
+mysql> SELECT name, LifeExpectancy
+     > FROM country
+     > WHERE Continent = "Europe"
+     > AND LifeExpectancy <
+     > (select avg(LifeExpectancy) FROM country)
+     > order by name ASC;
+
+
