@@ -1,0 +1,11 @@
+4.2.4 Students and their Qualifications
+
+Give the MongoDB command to show the name of each Student and his/her qualifications. 
+The output should be in alphabetical name order. 
+If the student has no qualifications the word “None” should appear.
+
+======================================================================================
+
+>
+> db.docs.aggregate([{$match:{"details.name":{$exists:true}}},{$project: {_id:0, "details.name":1, qualifications: {$ifNull:["$qualifications", "None"]}}}, {$sort:{"details.name":1}}])
+>
