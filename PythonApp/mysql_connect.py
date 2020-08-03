@@ -39,11 +39,11 @@ def ViewPeople():
 def ViewCountriesByIndependenceYear(independence_year):
     if (not conn):
         connect() 
-    sql = "SELECT Name, Continent, IndepYear FROM country WHERE IndepYear = %s"   
+    query = "SELECT Name, Continent, IndepYear FROM country WHERE IndepYear = %s"   
     with conn:  
         try:
             cursor = conn.cursor() 
-            cursor.execute(sql, (independence_year))    
+            cursor.execute(query, (independence_year))    
             x = cursor.fetchall()
             return x
                 
@@ -51,7 +51,31 @@ def ViewCountriesByIndependenceYear(independence_year):
             print(e)   
         except pymysql.err.InternalError as e:
             print(e)
+
+# Add New Person
+# The user is asked to enter details of a new person as shown, 
+# the person is then added to the world database. 
+# (NOTE: The user should not be prompted to enter a personID).
+
+def AddNewPerson(name, age):
+    if (not conn):
+        connect()
+    query = "INSERT into person (personname, age) VALUES (%s, %s)"   
+    with conn:
+        try:
+            cursor = conn.cursor()
+            cursor.execute(query, (name, age)) 
+            conn.commit() 
+        except pymysql.err.IntegrityError as e: 
+            print("*** ERROR ***:", name, "already exists. Back to the Main Menu.")   
+        except pymysql.err.InternalError as e: 
+            print(e)    
       
+# View Countries by Name
+# The user is asked to enter a country name or part thereof.
+# Any country that contains those letters should be displayed.
+
+def ViewCountriesByName():
 
 def main():
     if (not conn): 

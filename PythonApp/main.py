@@ -22,21 +22,37 @@ def main():
 
 # View Countries by Independence Year
 # The user is asked to enter a year.
+
         elif (choice == "2"):
             print("     ")
             print("Countries by Independence Year")
-            print("==============================")
-            
+            print("==============================") 
             independence_year = input("Enter Year: ")  
             year = mysql_connect.ViewCountriesByIndependenceYear(independence_year)   
             for y in year:                   
                 print(y["Name"], "|", y["Continent"], "|", y["IndepYear"]) 
             display_menu()    
-            
+
 # Add New Person
 # The user is asked to enter details of a new person as shown, 
 # the person is then added to the world database. 
 # (NOTE: The user should not be prompted to enter a personID).
+
+        elif (choice == "3"):
+            print("     ")
+            print("Add New Person")
+            print("==============")
+            name = input("Name : ") 
+            age = input("Age : ") 
+            mysql_connect.AddNewPerson(name, age)
+            display_menu()
+
+# View Countries by Name
+# The user is asked to enter a country name or part thereof.
+# Any country that contains those letters should be displayed.
+
+        elif (choice == "4")
+        
 
 
 def display_menu():
