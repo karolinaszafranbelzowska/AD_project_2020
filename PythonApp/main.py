@@ -16,9 +16,9 @@ def main():
 # View People
 # The user is shown the list of people in the world database, in groups of 2
 
-if(choice == "1"):
-    people = mysql_connect.ViewPeople()
-    display_menu()
+        if (choice == "1"):
+            people = mysql_connect.ViewPeople()
+            display_menu()
 
 
 def display_menu():

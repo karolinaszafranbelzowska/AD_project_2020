@@ -33,4 +33,6 @@ def ViewPeople():
                 print("Done!, Back to the Main Menu.")
                 break 
 
+if __name__ == "__main__":
+	main()
 
