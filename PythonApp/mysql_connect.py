@@ -33,6 +33,34 @@ def ViewPeople():
                 print("Done!, Back to the Main Menu.")
                 break 
 
+# View Countries by Independence Year
+# The user is asked to enter a year.
+
+def ViewCountriesByIndependenceYear(independence_year):
+    if (not conn):
+        connect() 
+    sql = "SELECT Name, Continent, IndepYear FROM country WHERE IndepYear = %s"   
+    with conn:  
+        try:
+            cursor = conn.cursor() 
+            cursor.execute(sql, (independence_year))    
+            x = cursor.fetchall()
+            return x
+                
+        except pymysql.err.IntegrityError as e:
+            print(e)   
+        except pymysql.err.InternalError as e:
+            print(e)
+      
+
+def main():
+    if (not conn): 
+        try:
+            connect() 
+        except Exception as e:
+            print("Problem connecting to database", e)
+
+
 if __name__ == "__main__":
 	main()
 

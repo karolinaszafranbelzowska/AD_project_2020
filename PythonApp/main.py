@@ -20,6 +20,24 @@ def main():
             people = mysql_connect.ViewPeople()
             display_menu()
 
+# View Countries by Independence Year
+# The user is asked to enter a year.
+        elif (choice == "2"):
+            print("     ")
+            print("Countries by Independence Year")
+            print("==============================")
+            
+            independence_year = input("Enter Year: ")  
+            year = mysql_connect.ViewCountriesByIndependenceYear(independence_year)   
+            for y in year:                   
+                print(y["Name"], "|", y["Continent"], "|", y["IndepYear"]) 
+            display_menu()    
+            
+# Add New Person
+# The user is asked to enter details of a new person as shown, 
+# the person is then added to the world database. 
+# (NOTE: The user should not be prompted to enter a personID).
+
 
 def display_menu():
     print("    ")
