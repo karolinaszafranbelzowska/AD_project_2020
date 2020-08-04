@@ -51,8 +51,23 @@ def main():
 # The user is asked to enter a country name or part thereof.
 # Any country that contains those letters should be displayed.
 
-        elif (choice == "4")
-        
+        elif (choice == "4"):
+            print("")
+            print("Countries by Name")
+            print("=================")
+            country_name = input("Enter Country Name: ")  
+            country = mysql_connect.ViewCountriesByName(country_name)
+            for c in country:    
+                print(c["Name"], "|", c["Continent"], "|", c["Population"], "|", c["HeadOfState"])
+            display_menu() 
+
+# View Countries by population
+# The user is asked to enter <, > or = and a number.
+# If > and 800000000 were entered, the country’s code, name, continent and population 
+# should be returned for all countries with a population of > 800000000. 
+# The same logic would apply for < and =.
+
+
 
 
 def display_menu():

@@ -75,7 +75,19 @@ def AddNewPerson(name, age):
 # The user is asked to enter a country name or part thereof.
 # Any country that contains those letters should be displayed.
 
-def ViewCountriesByName():
+def ViewCountriesByName(country_name):
+    if (not conn):
+        connect()
+    query = "SELECT Name, Continent, Population, HeadOfState from country where Name like %s"               
+    with conn:
+        try:
+            cursor = conn.cursor()
+            cursor.execute(query, ("%"+country_name+"%")) 
+            return cursor.fetchall()
+        except pymysql.err.IntegrityError as e: 
+            print(e)   
+        except pymysql.err.InternalError as e: 
+            print(e)
 
 def main():
     if (not conn): 
