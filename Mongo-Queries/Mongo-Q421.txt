@@ -1,9 +1,4 @@
-4.2.1 Average Age of Students
 
-Give the MongoDB command to find the average age of students
-
-
-==================================================================
 
 > 
 > db.docs.aggregate([{$group: {_id:null,Average: {$avg:"$details.age"}}}, {$project:{_id:0}}])

@@ -1,25 +1,4 @@
-4.1.3 Peoples stage of life
 
-
-Give the SQL command to show the following in ascending personID order:
-	- The person’s ID
-	- The person’s name
-	- The Person’s age
-	- A column called Stage that shows the following:
-
------------------------------------------
-Person’s ID	"Stage" - column output
------------------------------------------
-Under 18 - "Child"
------------------------------------------
-Between 18 and 29 - "Late teens/Twenties"
------------------------------------------
-Between 30 and 39 - "Thirty something"
------------------------------------------
-40 or older - "Other"
------------------------------------------
-
-'================================================================================
 
 mysql> SELECT PersonID, personname, age,
      > CASE

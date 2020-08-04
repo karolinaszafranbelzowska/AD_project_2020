@@ -1,9 +1,4 @@
-4.2.3 Qualified Students
 
-Give the MongoDB command to show the number of 
-Qualified Students i.e. those documents with a qualifications field.
-
-======================================================================
 
 >
 > db.docs.aggregate([{$match:{qualifications:{$exists:1}}}, {$count: "Qualified Students"}])

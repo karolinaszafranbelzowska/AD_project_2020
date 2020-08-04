@@ -107,6 +107,32 @@ def main():
                 print(s["_id"], "|", s["details"] ["name"], "|",  s["details"] ["age"], "|", s["qualifications"])
             display_menu()
 
+# Add New Course
+# The user is asked to enter an _id, Name and Level for a new course, 
+# which is then added to the “docs” collection in the “proj20DB” database.
+
+        elif (choice == "7"):
+            print("   ")
+            print("Add New Course")
+            print("==============")
+            ID = input("_id:")
+            Name = input("Name:")
+            Level = input("Level:")
+            mongo_connect.AddNewCourse(ID, Name, Level)
+            display_menu()
+
+# x - Exit Application, Anything Else
+# The program terminates and anything else the menu is shown again.
+
+        elif (choice == "x"):
+            break;        
+
+        else:
+            display_menu()
+
+# The main menu shown as Python program specyfication 
+# Taken from lecture Applied Databases module, Gerard Harrison, GMIT, Higher Diploma in Data Analytics.
+
 def display_menu():
     print("    ")
     print("MENU")

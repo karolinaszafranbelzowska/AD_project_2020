@@ -27,6 +27,22 @@ def find_students(Address):
     people = docs.aggregate(query)  
     return people
 
+# Add New Course
+# The user is asked to enter an _id, Name and Level for a new course, 
+# which is then added to the “docs” collection in the “proj20DB” database.
+
+def AddNewCourse(ID, Name, Level):
+    if (not myclient): 
+             connect() 
+    mydb = myclient["proj20DB"]  
+    docs = mydb["docs"]    
+    newCor = {"_id" : ID, "name" : Name, "level" : Level}  
+    try:
+        docs.insert_one(newCor) 
+    except pymongo.errors.DuplicateKeyError as e:  
+        print("*** ERROR ***: _id DATA already exists, please try again.") 
+    except Exception as e: 
+        print("Error:", e)
 
 def main():
     if (not myclient): 

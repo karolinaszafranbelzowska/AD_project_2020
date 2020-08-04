@@ -1,20 +1,3 @@
-Alan's travel details
-
-Give the MySQL command that shows;
-- the name of the cities,
-- the arrival date in the cities,
-- the name of the country the city is in.
-
-For all cities and countries visited by Alan in alphabetical order by city name.
-
-Tables: 
-	c - city
-	co - country
-	has - hasvisitedcity
-	p - person
-	cl - countrylanguage
-
-===============================================================================================================================
 
 mysql> select c.Name,has.dateArrived, co.Name
     -> from person p
@@ -27,6 +10,6 @@ mysql> select c.Name,has.dateArrived, co.Name
     -> where p.personname = "Alan"
     -> ORDER BY c.Name ASC;
 
-===============================================================================================================================
+
 
 
