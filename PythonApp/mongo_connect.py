@@ -1,4 +1,4 @@
-# Karolina Szafran-Belzowska, G00376368, 03/08/2020
+# Karolina Szafran-Belzowska, G00376368, 04/08/2020
 # project Applied Databases, Higher Diploma in Science in Data Analytics
 
 import pymongo
@@ -9,7 +9,7 @@ def connect():
     
     global myclient   
     myclient = pymongo.MongoClient()
-    myclient.admin.command('ismaster')
+    myclient.admin.command('ismaster')   # to check if mongo succesfully connected        
 
 # Find Students by Address
 # The user is asked to enter aan address.
@@ -18,9 +18,9 @@ def connect():
 # has a qualifications attribute this must be shown.
 
 def find_students(Address):
-    if (not myclient): 
+    if (not myclient):            
         connect()
-    mydb = myclient["proj20DB"]  
+    mydb = myclient["proj20DB"]    # DATABASE and COLLECTION
     docs = mydb["docs"]  
    
     query = [{"$match":{"details.address":{"$eq": Address}}}, {"$project": {"details.name":1, "details.age":1, "qualifications":{"$ifNull":["$qualifications", " "]}}}]
@@ -36,9 +36,9 @@ def AddNewCourse(ID, Name, Level):
              connect() 
     mydb = myclient["proj20DB"]  
     docs = mydb["docs"]    
-    newCor = {"_id" : ID, "name" : Name, "level" : Level}  
+    newCor = {"_id" : ID, "name" : Name, "level" : Level}  # Document which will be inserted is called newCor
     try:
-        docs.insert_one(newCor) 
+        docs.insert_one(newCor) # try to insert a newCor into MongoDB 
     except pymongo.errors.DuplicateKeyError as e:  
         print("*** ERROR ***: _id DATA already exists, please try again.") 
     except Exception as e: 
