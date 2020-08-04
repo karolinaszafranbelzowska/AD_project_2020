@@ -4,6 +4,7 @@
 
 
 import mysql_connect
+import mongo_connect
 
 
 
@@ -67,8 +68,44 @@ def main():
 # should be returned for all countries with a population of > 800000000. 
 # The same logic would apply for < and =.
 
+        elif (choice == "5"):
+            print("   ")
+            print("Countries by Pop")
+            print("================")
+            enter = input("Enter < > or =:")  
+            while enter not in ("<", ">", "="):  
+                enter = input("Enter < > or =:")
+                if enter in ("<", ">", "="):  
+                    break
+            run = int(input("Enter population:")) 
+            populations = mysql_connect.ViewCountriesByPopulation()    
+            for p in populations:          
+                if enter == "<":                     
+                    if int(p["Population"]) < int(run):   
+                        print(p["Code"],"|", p["Name"], "|", p["Continent"], "|", p["Population"])
+                elif enter == "=":                   
+                    if int(p["Population"]) == int(run):
+                            print(p["Code"],"|", p["Name"], "|", p["Continent"], "|", p["Population"])
+                elif enter == ">":                   
+                    if int(p["Population"]) > int(run):
+                            print(p["Code"],"|", p["Name"], "|", p["Continent"], "|", p["Population"])
+            display_menu()
 
+# Find Students by Address
+# The user is asked to enter aan address.
+# All details of students in the docs collection in the proj20DB database with that address asre shown.
+# NOTE: if a student does not have a qualifications attribute, nothing should be shown. But if he/she 
+# has a qualifications attribute this must be shown.
 
+        elif (choice == "6"):
+            print("   ")
+            print("Find Students by Addresses")
+            print("==========================")
+            Address = input("Enter Address: ") 
+            students = mongo_connect.find_students(Address)   
+            for s in students: 
+                print(s["_id"], "|", s["details"] ["name"], "|",  s["details"] ["age"], "|", s["qualifications"])
+            display_menu()
 
 def display_menu():
     print("    ")

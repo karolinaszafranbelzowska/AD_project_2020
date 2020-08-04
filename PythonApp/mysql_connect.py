@@ -89,6 +89,28 @@ def ViewCountriesByName(country_name):
         except pymysql.err.InternalError as e: 
             print(e)
 
+# View Countries by population
+# The user is asked to enter <, > or = and a number.
+# If > and 800000000 were entered, the country’s code, name, continent and population 
+# should be returned for all countries with a population of > 800000000. 
+# The same logic would apply for < and =.
+
+def ViewCountriesByPopulation():    
+    if (not conn):
+        connect()
+    query = "SELECT * from country"
+    with conn:     
+        try:
+            cursor = conn.cursor()
+            cursor.execute(query)
+            x = cursor.fetchall()
+            return x
+        except pymysql.err.IntegrityError as e: 
+            print(e)   
+        except pymysql.err.InternalError as e: 
+            print(e)
+
+
 def main():
     if (not conn): 
         try:

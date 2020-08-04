@@ -1,0 +1,43 @@
+# Karolina Szafran-Belzowska, G00376368, 03/08/2020
+# project Applied Databases, Higher Diploma in Science in Data Analytics
+
+import pymongo
+
+myclient = None
+
+def connect():  
+    
+    global myclient   
+    myclient = pymongo.MongoClient()
+    myclient.admin.command('ismaster')
+
+# Find Students by Address
+# The user is asked to enter aan address.
+# All details of students in the docs collection in the proj20DB database with that address asre shown.
+# NOTE: if a student does not have a qualifications attribute, nothing should be shown. But if he/she 
+# has a qualifications attribute this must be shown.
+
+def find_students(Address):
+    if (not myclient): 
+        connect()
+    mydb = myclient["proj20DB"]  
+    docs = mydb["docs"]  
+   
+    query = [{"$match":{"details.address":{"$eq": Address}}}, {"$project": {"details.name":1, "details.age":1, "qualifications":{"$ifNull":["$qualifications", " "]}}}]
+    people = docs.aggregate(query)  
+    return people
+
+
+def main():
+    if (not myclient): 
+        try:
+            connect() 
+        except Exception as e:
+            print("Problem connecting to database", e)
+
+if __name__ == "__main__":
+	main()
+
+
+
+
