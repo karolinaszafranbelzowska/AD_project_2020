@@ -1,17 +1,24 @@
 # Karolina Szafran-Belzowska, G00376368, 03/08/2020
 # project Applied Databases, Higher Diploma in Science in Data Analytics
+
 # Write a python program that displays a main menu 
+
+
+# import mysql_connect to connect to MySQL database and all MySQL functions 
+# to be called.
+
+# import mongo_connect to connect MongoDB and all Mongo functions to be called.
 
 
 import mysql_connect
 import mongo_connect
 
 
-
+# the main program
 def main():
-    display_menu()
+    display_menu()   # this function will display the menu.
     
-    while True:
+    while True:    # while TRUE call the menu.
         choice = input("Choice:") 
 
 # View People
@@ -28,10 +35,12 @@ def main():
             print("     ")
             print("Countries by Independence Year")
             print("==============================") 
-            independence_year = input("Enter Year: ")  
+            independence_year = input("Enter Year: ")  # The user is asked to enter a year.
+            # call the function from connect file
             year = mysql_connect.ViewCountriesByIndependenceYear(independence_year)   
-            for y in year:                   
-                print(y["Name"], "|", y["Continent"], "|", y["IndepYear"]) 
+            for y in year:   # for loop used to print all countries with certain year entered.
+                             # If no countries became independent in the year entered nothing is shown.                
+                print(y["Name"], "|", y["Continent"], "|", y["IndepYear"]) # print the country
             display_menu()    
 
 # Add New Person
@@ -43,8 +52,8 @@ def main():
             print("     ")
             print("Add New Person")
             print("==============")
-            name = input("Name : ") 
-            age = input("Age : ") 
+            name = input("Name : ") # Enter a new person name.
+            age = input("Age : ")  # Enter a new person age.
             mysql_connect.AddNewPerson(name, age)
             display_menu()
 
@@ -56,9 +65,9 @@ def main():
             print("")
             print("Countries by Name")
             print("=================")
-            country_name = input("Enter Country Name: ")  
-            country = mysql_connect.ViewCountriesByName(country_name)
-            for c in country:    
+            country_name = input("Enter Country Name: ")   # The user is asked to enter the contry name.
+            country = mysql_connect.ViewCountriesByName(country_name)  # Get the country data from country table.
+            for c in country:   # for loop to print all countries the user asks. 
                 print(c["Name"], "|", c["Continent"], "|", c["Population"], "|", c["HeadOfState"])
             display_menu() 
 
@@ -72,21 +81,21 @@ def main():
             print("   ")
             print("Countries by Pop")
             print("================")
-            enter = input("Enter < > or =:")  
-            while enter not in ("<", ">", "="):  
+            enter = input("Enter < > or =:")   # The user is asked to enter <, > or =.
+            while enter not in ("<", ">", "="):  #  while none of these 3 signs are entered loop will continue to run and ask for valid input
                 enter = input("Enter < > or =:")
-                if enter in ("<", ">", "="):  
+                if enter in ("<", ">", "="):  # when valid input is entered loop break and move on to take next input.
                     break
-            run = int(input("Enter population:")) 
-            populations = mysql_connect.ViewCountriesByPopulation()    
-            for p in populations:          
-                if enter == "<":                     
-                    if int(p["Population"]) < int(run):   
+            run = int(input("Enter population:")) # The user is asked to enter population as integer.
+            populations = mysql_connect.ViewCountriesByPopulation()   # function to retrieve all data from country table 
+            for p in populations:  # loop through all rows of table and check whole data as below        
+                if enter == "<":   # return countries with population less than user input.                  
+                    if int(p["Population"]) < int(run):   # Convert to integers
                         print(p["Code"],"|", p["Name"], "|", p["Continent"], "|", p["Population"])
-                elif enter == "=":                   
+                elif enter == "=":   # return countries with population equal to user input.                
                     if int(p["Population"]) == int(run):
                             print(p["Code"],"|", p["Name"], "|", p["Continent"], "|", p["Population"])
-                elif enter == ">":                   
+                elif enter == ">":     # return countries with population greater than user input.                
                     if int(p["Population"]) > int(run):
                             print(p["Code"],"|", p["Name"], "|", p["Continent"], "|", p["Population"])
             display_menu()
