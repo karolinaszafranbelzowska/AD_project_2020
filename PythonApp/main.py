@@ -26,7 +26,7 @@ def main():
 
         if (choice == "1"):
             people = mysql_connect.ViewPeople()
-            display_menu()
+            display_menu()  # Back to the main menu.
 
 # View Countries by Independence Year
 # The user is asked to enter a year.
@@ -41,7 +41,7 @@ def main():
             for y in year:   # for loop used to print all countries with certain year entered.
                              # If no countries became independent in the year entered nothing is shown.                
                 print(y["Name"], "|", y["Continent"], "|", y["IndepYear"]) # print the country
-            display_menu()    
+            display_menu()    # Back to the main menu.
 
 # Add New Person
 # The user is asked to enter details of a new person as shown, 
@@ -55,7 +55,7 @@ def main():
             name = input("Name : ") # Enter a new person name.
             age = input("Age : ")  # Enter a new person age.
             mysql_connect.AddNewPerson(name, age)
-            display_menu()
+            display_menu()     # Back to the main menu.
 
 # View Countries by Name
 # The user is asked to enter a country name or part thereof.
@@ -69,7 +69,7 @@ def main():
             country = mysql_connect.ViewCountriesByName(country_name)  # Get the country data from country table.
             for c in country:   # for loop to print all countries the user asks. 
                 print(c["Name"], "|", c["Continent"], "|", c["Population"], "|", c["HeadOfState"])
-            display_menu() 
+            display_menu()     # Back to the main menu.
 
 # View Countries by population
 # The user is asked to enter <, > or = and a number.
@@ -98,10 +98,10 @@ def main():
                 elif enter == ">":     # return countries with population greater than user input.                
                     if int(p["Population"]) > int(run):
                             print(p["Code"],"|", p["Name"], "|", p["Continent"], "|", p["Population"])
-            display_menu()
+            display_menu()     # Back to the main menu.
 
 # Find Students by Address
-# The user is asked to enter aan address.
+# The user is asked to enter an address.
 # All details of students in the docs collection in the proj20DB database with that address asre shown.
 # NOTE: if a student does not have a qualifications attribute, nothing should be shown. But if he/she 
 # has a qualifications attribute this must be shown.
@@ -110,11 +110,11 @@ def main():
             print("   ")
             print("Find Students by Addresses")
             print("==========================")
-            Address = input("Enter Address: ") 
-            students = mongo_connect.find_students(Address)   
-            for s in students: 
-                print(s["_id"], "|", s["details"] ["name"], "|",  s["details"] ["age"], "|", s["qualifications"])
-            display_menu()
+            Address = input("Enter Address: ")   # Enter an address.
+            students = mongo_connect.find_students(Address)   # Call the FIND function from mongo_connect file. Pass the address into the function.
+            for s in students:    # loop through all rows of table and check whole data.
+                print(s["_id"], "|", s["details"] ["name"], "|",  s["details"] ["age"], "|", s["qualifications"])    # Print students details.
+            display_menu()    # Back to the main menu.
 
 # Add New Course
 # The user is asked to enter an _id, Name and Level for a new course, 
@@ -122,19 +122,19 @@ def main():
 
         elif (choice == "7"):
             print("   ")
-            print("Add New Course")
+            print("Add New Course: ")
             print("==============")
-            ID = input("_id:")
+            ID = input("_id:")   # The user is asked to enter details of a new course. This input will be passed to the function below.
             Name = input("Name:")
             Level = input("Level:")
-            mongo_connect.AddNewCourse(ID, Name, Level)
-            display_menu()
+            mongo_connect.AddNewCourse(ID, Name, Level) # Call the function to add new course from mongo_connect file.
+            display_menu()    # Back to the main menu.
 
 # x - Exit Application, Anything Else
 # The program terminates and anything else the menu is shown again.
 
         elif (choice == "x"):
-            break;        
+            break;        # Exit appication if the user enter "x".
 
         else:
             display_menu()
@@ -143,6 +143,7 @@ def main():
 # Taken from lecture Applied Databases module, Gerard Harrison, GMIT, Higher Diploma in Data Analytics.
 
 def display_menu():
+# Menu as in project specyfication.
     print("    ")
     print("MENU")
     print("=====")
@@ -156,6 +157,5 @@ def display_menu():
     print("x - Exit application")
 
 
-if __name__ == "__main__":
-	# execute only if run as a script 
+if __name__ == "__main__":   # The main function called.
 	main()
